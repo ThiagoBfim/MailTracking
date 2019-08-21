@@ -1,12 +1,12 @@
 package com.mail.enuns;
 
-public enum EstadoEmail {
+public enum SituacaoEmail {
 
     ENVIADO,
     LIDO,
     PENDENTE;
 
 
-    EstadoEmail() { }
+    SituacaoEmail() { }
 
 }
