@@ -1,6 +1,7 @@
 package com.mail.domain;
 
 import com.mail.enuns.SituacaoEmail;
+import com.mail.util.JsonUtil;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -58,5 +59,9 @@ public class EmailEntity extends BaseEntity {
     public EmailEntity setDataAtualizacao(LocalDateTime dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
         return this;
+    }
+
+    public String toJson() {
+        return JsonUtil.formatObjectToJson(this);
     }
 }
