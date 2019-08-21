@@ -16,6 +16,9 @@ public class EmailEntity extends BaseEntity {
     @Column(name = "DT_ENVIO")
     private LocalDateTime dataEnvio;
 
+    @Column(name = "DT_ATUALIZACAO")
+    private LocalDateTime dataAtualizacao;
+
     @Column(name = "TP_SITUACAO")
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'PENDENTE'")
@@ -45,6 +48,15 @@ public class EmailEntity extends BaseEntity {
 
     public EmailEntity setSituacao(SituacaoEmail situacao) {
         this.situacao = situacao;
+        return this;
+    }
+
+    public LocalDateTime getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public EmailEntity setDataAtualizacao(LocalDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
         return this;
     }
 }
