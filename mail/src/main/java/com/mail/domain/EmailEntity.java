@@ -14,6 +14,10 @@ public class EmailEntity extends BaseEntity {
     @Column(name = "DS_EMAIL_DESTINATARIO", nullable = false)
     private String emailDestinatario;
 
+
+    @Column(name = "DS_MESSAGE", nullable = false)
+    private String message;
+
     @Column(name = "DT_ENVIO")
     private LocalDateTime dataEnvio;
 
@@ -22,6 +26,7 @@ public class EmailEntity extends BaseEntity {
 
     @Column(name = "TP_SITUACAO")
     @Enumerated(EnumType.STRING)
+
     @ColumnDefault("'PENDENTE'")
     private SituacaoEmail situacao = SituacaoEmail.PENDENTE;
 
@@ -63,5 +68,14 @@ public class EmailEntity extends BaseEntity {
 
     public String toJson() {
         return JsonUtil.formatObjectToJson(this);
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public EmailEntity setMessage(String message) {
+        this.message = message;
+        return this;
     }
 }

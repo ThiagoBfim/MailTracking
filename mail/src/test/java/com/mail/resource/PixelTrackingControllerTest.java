@@ -35,10 +35,17 @@ public class PixelTrackingControllerTest {
         EmailEntity spyEmail = Mockito.spy(email);
         Mockito.when(emailRepository.findById(1L)).thenReturn(Optional.ofNullable(spyEmail));
         Mockito.when(emailRepository.save(Mockito.any())).thenReturn(email);
-        this.mockMvc.perform(get("/mail/read?id=1"))
+        this.mockMvc.perform(get("/read?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"emailDestinatario\":\"email@mail.com\",\"situacao\":\"PENDENTE\",\"codigo\":1}"));
         Assert.assertEquals(SituacaoEmail.LIDO, spyEmail.getSituacao());
+    }
+
+    @Test
+    public void shouldEmailNotFound() throws Exception {
+        this.mockMvc.perform(get("/read?id=0"))
+                .andExpect(status().isNoContent())
+                .andExpect(content().json("\"Not found e-mail with id: 0\""));
     }
 
     private EmailEntity createEmail() {
