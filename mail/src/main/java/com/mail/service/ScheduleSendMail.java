@@ -13,11 +13,11 @@ public class ScheduleSendMail {
     private static final Logger LOGGER = LoggerFactory.getLogger(ScheduleSendMail.class.getName());
 
     @Autowired
-    private MailSenderImpl mailSender;
+    private EmailService emailService;
 
     @Scheduled(cron = "*/10 * * * * *")
     public void sendMailSchedule() {
         LOGGER.info("Executando o envio dos e-mails");
-        mailSender.sendAllEmail();
+        emailService.sendAllEmail();
     }
 }
