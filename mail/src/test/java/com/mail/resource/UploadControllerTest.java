@@ -28,8 +28,8 @@ public class UploadControllerTest {
 
     @Test
     public void shouldUploadDataWithData() throws Exception {
-        String content = "destinatario,message\n" +
-                "test@mail.com,TEST MESSAGE";
+        String content = "destinatario,message,assunto\n" +
+                "test@mail.com,TEST MESSAGE,Testando e-mail";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
                 "text/csv", content.getBytes());
@@ -42,7 +42,7 @@ public class UploadControllerTest {
 
     @Test
     public void shouldUploadDataWithouData() throws Exception {
-        String content = "destinatario,message\n";
+        String content = "destinatario,message,assunto\n";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
                 "text/csv", content.getBytes());
@@ -55,7 +55,7 @@ public class UploadControllerTest {
 
     @Test
     public void shouldReturnErroWhenColumnsWasWrong() throws Exception {
-        String content = "destinatario2,message2\n";
+        String content = "destinatario2,message2,assunto2\n";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
                 "text/csv", content.getBytes());
@@ -63,13 +63,13 @@ public class UploadControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(firstFile))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("Header is missing required fields [MESSAGE,DESTINATARIO]"));
+                .andExpect(content().string("Header is missing required fields [MESSAGE,DESTINATARIO,ASSUNTO]"));
     }
 
     @Test
     public void shouldReturnErroWhenUploadDataIncorrectType() throws Exception {
-        String content = "destinatario,message\n" +
-                "test@mail.com,TEST MESSAGE";
+        String content = "destinatario,message,assunto\n" +
+                "test@mail.com,TEST MESSAGE,Testando e-mail";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
                 "json", content.getBytes());

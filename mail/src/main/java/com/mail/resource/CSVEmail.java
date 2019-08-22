@@ -11,6 +11,9 @@ public class CSVEmail {
     @CsvBindByName(column = "message", required = true)
     private String message;
 
+    @CsvBindByName(column = "assunto", required = true)
+    private String assunto;
+
     public String getDestinatario() {
         return destinatario;
     }
@@ -29,7 +32,16 @@ public class CSVEmail {
         return this;
     }
 
-    public boolean isValid(){
+    public String getAssunto() {
+        return assunto;
+    }
+
+    public CSVEmail setAssunto(String assunto) {
+        this.assunto = assunto;
+        return this;
+    }
+
+    boolean isValid() {
         return StringUtils.isNotBlank(getDestinatario()) && StringUtils.isNotBlank(getMessage());
     }
 }

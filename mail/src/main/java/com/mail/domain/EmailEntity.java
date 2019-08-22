@@ -14,9 +14,11 @@ public class EmailEntity extends BaseEntity {
     @Column(name = "DS_EMAIL_DESTINATARIO", nullable = false)
     private String emailDestinatario;
 
-
     @Column(name = "DS_MESSAGE", nullable = false)
     private String message;
+
+    @Column(name = "DS_ASSUNTO", nullable = false)
+    private String assunto;
 
     @Column(name = "DT_ENVIO")
     private LocalDateTime dataEnvio;
@@ -76,6 +78,15 @@ public class EmailEntity extends BaseEntity {
 
     public EmailEntity setMessage(String message) {
         this.message = message;
+        return this;
+    }
+
+    public String getAssunto() {
+        return assunto;
+    }
+
+    public EmailEntity setAssunto(String assunto) {
+        this.assunto = assunto;
         return this;
     }
 }
