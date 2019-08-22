@@ -42,6 +42,6 @@ public class CSVEmail {
     }
 
     boolean isValid() {
-        return StringUtils.isNotBlank(getDestinatario()) && StringUtils.isNotBlank(getMessage());
+        return StringUtils.isNotBlank(getDestinatario()) && StringUtils.isNotBlank(getMessage()) && StringUtils.isNotBlank(getAssunto());
     }
 }

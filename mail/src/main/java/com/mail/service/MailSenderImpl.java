@@ -1,7 +1,6 @@
 package com.mail.service;
 
 import com.mail.domain.EmailEntity;
-import com.mail.enuns.SituacaoEmail;
 import com.mail.repository.EmailRepository;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,13 +27,20 @@ public class MailSenderImpl {
     @Autowired
     private Environment environment;
 
-    public void sendAllEmail() {
-        List<EmailEntity> emails = emailRepository.findAllBySituacao(SituacaoEmail.PENDENTE);
+    void sendAllEmail() {
+        List<EmailEntity> emails = emailRepository.findAllByDataEnvioIsNull();
         emails.forEach(email -> {
             if (isValidEmailAddress(email.getEmailDestinatario())) {
                 sendMail(email);
+                updateEmail(email);
             }
         });
+    }
+
+    @Transactional
+    void updateEmail(EmailEntity email) {
+        email.setDataEnvio(LocalDateTime.now());
+        emailRepository.save(email);
     }
 
     private static boolean isValidEmailAddress(String email) {

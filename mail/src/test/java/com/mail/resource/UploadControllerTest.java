@@ -63,7 +63,7 @@ public class UploadControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(firstFile))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("Header is missing required fields [MESSAGE,DESTINATARIO,ASSUNTO]"));
+                .andExpect(content().string("Header is missing required fields [MESSAGE,ASSUNTO,DESTINATARIO]"));
     }
 
     @Test

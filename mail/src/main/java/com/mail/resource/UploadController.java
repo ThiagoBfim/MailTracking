@@ -57,6 +57,7 @@ public class UploadController {
                         email.setSituacao(SituacaoEmail.PENDENTE);
                         email.setEmailDestinatario(emailCsv.getDestinatario());
                         email.setMessage(emailCsv.getMessage());
+                        email.setAssunto(emailCsv.getAssunto());
                         return email;
                     })
                     .forEach(emailEntity -> saveEmail(countRegistroSalvos, emailEntity));
