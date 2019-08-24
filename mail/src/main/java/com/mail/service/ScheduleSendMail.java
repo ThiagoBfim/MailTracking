@@ -15,7 +15,7 @@ public class ScheduleSendMail {
     @Autowired
     private EmailService emailService;
 
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void sendMailSchedule() {
         LOGGER.info("Executando o envio dos e-mails");
         emailService.sendAllEmail();

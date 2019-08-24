@@ -36,8 +36,8 @@ public class UploadController {
             throw new RuntimeException("You must select the a file for uploading");
         }
         String contentType = file.getContentType();
-        if (!"text/csv".equals(contentType)) {
-            return new ResponseEntity<>("Content type must be text/csv", HttpStatus.BAD_REQUEST);
+        if (!"application/vnd.ms-excel".equals(contentType)) {
+            return new ResponseEntity<>("Content type must be application/vnd.ms-excel.\nYou have send a : " + contentType, HttpStatus.BAD_REQUEST);
         }
 
         Path fileTmp = Files.createTempFile("upload", "tmp");

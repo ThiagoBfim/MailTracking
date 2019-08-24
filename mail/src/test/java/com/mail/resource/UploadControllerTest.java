@@ -32,7 +32,7 @@ public class UploadControllerTest {
                 "test@mail.com,TEST MESSAGE,Testando e-mail";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
-                "text/csv", content.getBytes());
+                "application/vnd.ms-excel", content.getBytes());
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(firstFile))
@@ -45,7 +45,7 @@ public class UploadControllerTest {
         String content = "destinatario,message,assunto\n";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
-                "text/csv", content.getBytes());
+                "application/vnd.ms-excel", content.getBytes());
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(firstFile))
@@ -58,7 +58,7 @@ public class UploadControllerTest {
         String content = "destinatario2,message2,assunto2\n";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
-                "text/csv", content.getBytes());
+                "application/vnd.ms-excel", content.getBytes());
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(firstFile))
@@ -77,7 +77,7 @@ public class UploadControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(firstFile))
                 .andExpect(status().is(400))
-                .andExpect(content().string("Content type must be text/csv"));
+                .andExpect(content().string("Content type must be application/vnd.ms-excel.\nYou have send a : json"));
     }
 
 }
