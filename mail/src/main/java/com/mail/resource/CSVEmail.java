@@ -5,21 +5,21 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CSVEmail {
 
-    @CsvBindByName(column = "destinatario", required = true)
-    private String destinatario;
+    @CsvBindByName(column = "addressee", required = true)
+    private String addressee; //destinatario
 
     @CsvBindByName(column = "message", required = true)
     private String message;
 
-    @CsvBindByName(column = "assunto", required = true)
-    private String assunto;
+    @CsvBindByName(column = "subject", required = true)
+    private String subject;
 
-    public String getDestinatario() {
-        return destinatario;
+    public String getAddressee() {
+        return addressee;
     }
 
-    public CSVEmail setDestinatario(String destinatario) {
-        this.destinatario = destinatario;
+    public CSVEmail setAddressee(String addressee) {
+        this.addressee = addressee;
         return this;
     }
 
@@ -32,16 +32,16 @@ public class CSVEmail {
         return this;
     }
 
-    public String getAssunto() {
-        return assunto;
+    public String getSubject() {
+        return subject;
     }
 
-    public CSVEmail setAssunto(String assunto) {
-        this.assunto = assunto;
+    public CSVEmail setSubject(String subject) {
+        this.subject = subject;
         return this;
     }
 
     boolean isValid() {
-        return StringUtils.isNotBlank(getDestinatario()) && StringUtils.isNotBlank(getMessage()) && StringUtils.isNotBlank(getAssunto());
+        return StringUtils.isNotBlank(getAddressee()) && StringUtils.isNotBlank(getMessage()) && StringUtils.isNotBlank(getSubject());
     }
 }

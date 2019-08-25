@@ -23,9 +23,9 @@ public class MailSenderImpl {
 
     public void sendMail(EmailEntity email) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(email.getEmailDestinatario());
+        msg.setTo(email.getAddressee());
 
-        msg.setSubject(email.getAssunto());
+        msg.setSubject(email.getSubject());
         msg.setText(email.getMessage() + includePixelTracking());
 
         javaMailSender.send(msg);

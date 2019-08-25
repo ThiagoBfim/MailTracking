@@ -1,7 +1,7 @@
 package com.mail.resource;
 
 import com.mail.domain.EmailEntity;
-import com.mail.enuns.SituacaoEmail;
+import com.mail.enuns.MailState;
 import com.mail.repository.EmailRepository;
 import com.mail.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,8 @@ public class PixelTrackingController {
     @GetMapping("/read")
     public ResponseEntity<String> updateReaded(@RequestParam(value = "id") Long id) {
         return emailRepository.findById(id).map(email -> {
-            email.setSituacao(SituacaoEmail.READ);
-            email.setDataAtualizacao(LocalDateTime.now());
+            email.setState(MailState.READ);
+            email.setUpdateDate(LocalDateTime.now());
             EmailEntity emailSaved = emailRepository.save(email);
             return new ResponseEntity<>(emailSaved.toJson(), HttpStatus.OK);
         }).orElse(new ResponseEntity<>(createNotFoundJsonMessage(id), HttpStatus.NO_CONTENT));

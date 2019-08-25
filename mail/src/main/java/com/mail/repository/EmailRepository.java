@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EmailRepository extends JpaRepository<EmailEntity, Long> {
 
-    List<EmailEntity> findAllByDataEnvioIsNull();
+    List<EmailEntity> findAllBySendDateIsNull();
 }

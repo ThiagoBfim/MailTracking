@@ -28,7 +28,7 @@ public class UploadControllerTest {
 
     @Test
     public void shouldUploadDataWithData() throws Exception {
-        String content = "destinatario,message,assunto\n" +
+        String content = "addressee,message,subject\n" +
                 "test@mail.com,TEST MESSAGE,Testando e-mail";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
@@ -42,7 +42,7 @@ public class UploadControllerTest {
 
     @Test
     public void shouldUploadDataWithouData() throws Exception {
-        String content = "destinatario,message,assunto\n";
+        String content = "addressee,message,subject\n";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",
                 "application/vnd.ms-excel", content.getBytes());
@@ -63,12 +63,12 @@ public class UploadControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(firstFile))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("Header is missing required fields [MESSAGE,ASSUNTO,DESTINATARIO]"));
+                .andExpect(content().string("Header is missing required fields [MESSAGE,SUBJECT,ADDRESSEE]"));
     }
 
     @Test
     public void shouldReturnErroWhenUploadDataIncorrectType() throws Exception {
-        String content = "destinatario,message,assunto\n" +
+        String content = "addressee,message,subject\n" +
                 "test@mail.com,TEST MESSAGE,Testando e-mail";
         MockMultipartFile firstFile = new MockMultipartFile("file",
                 "filename.csv",

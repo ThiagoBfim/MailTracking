@@ -10,10 +10,10 @@ public class JsonUtilTest {
     @Test
     public void formatObjectToJson() {
         EmailEntity emailEntity = new EmailEntity();
-        emailEntity.setCodigo(1L);
-        emailEntity.setEmailDestinatario("email@mail.com");
+        emailEntity.setCode(1L);
+        emailEntity.setAddressee("email@mail.com");
         String emailJson = JsonUtil.formatObjectToJson(emailEntity);
-        assertEquals("{\"emailDestinatario\":\"email@mail.com\",\"situacao\":\"PENDENTE\",\"codigo\":1}",
+        assertEquals("{\"addressee\":\"email@mail.com\",\"state\":\"PENDING\",\"code\":1}",
                 emailJson);
     }
 }

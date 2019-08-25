@@ -1,12 +1,12 @@
 package com.mail.enuns;
 
-public enum SituacaoEmail {
+public enum MailState {
 
     PENDING,
     SENT,
     READ;
 
 
-    SituacaoEmail() { }
+    MailState() { }
 
 }

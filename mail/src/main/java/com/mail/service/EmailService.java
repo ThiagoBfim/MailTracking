@@ -1,7 +1,7 @@
 package com.mail.service;
 
 import com.mail.domain.EmailEntity;
-import com.mail.enuns.SituacaoEmail;
+import com.mail.enuns.MailState;
 import com.mail.repository.EmailRepository;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,9 @@ public class EmailService {
     private MailSenderImpl mailSender;
 
     void sendAllEmail() {
-        List<EmailEntity> emails = emailRepository.findAllByDataEnvioIsNull();
+        List<EmailEntity> emails = emailRepository.findAllBySendDateIsNull();
         emails.forEach(email -> {
-            if (isValidEmailAddress(email.getEmailDestinatario())) {
+            if (isValidEmailAddress(email.getAddressee())) {
                 mailSender.sendMail(email);
                 updateEmail(email);
             } else {
@@ -51,8 +51,8 @@ public class EmailService {
 
     @Transactional
     void updateEmail(EmailEntity email) {
-        email.setDataEnvio(LocalDateTime.now());
-        email.setSituacao(SituacaoEmail.SENT);
+        email.setSendDate(LocalDateTime.now());
+        email.setState(MailState.SENT);
         emailRepository.save(email);
     }
 }

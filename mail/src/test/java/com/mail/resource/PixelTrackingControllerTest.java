@@ -1,7 +1,7 @@
 package com.mail.resource;
 
 import com.mail.domain.EmailEntity;
-import com.mail.enuns.SituacaoEmail;
+import com.mail.enuns.MailState;
 import com.mail.repository.EmailRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,8 +37,8 @@ public class PixelTrackingControllerTest {
         Mockito.when(emailRepository.save(Mockito.any())).thenReturn(email);
         this.mockMvc.perform(get("/read?id=1"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"emailDestinatario\":\"email@mail.com\",\"situacao\":\"PENDENTE\",\"codigo\":1}"));
-        Assert.assertEquals(SituacaoEmail.READ, spyEmail.getSituacao());
+                .andExpect(content().json("{\"addressee\":\"email@mail.com\",\"state\":\"PENDING\",\"code\":1}"));
+        Assert.assertEquals(MailState.READ, spyEmail.getState());
     }
 
     @Test
@@ -50,8 +50,8 @@ public class PixelTrackingControllerTest {
 
     private EmailEntity createEmail() {
         EmailEntity emailEntity = new EmailEntity();
-        emailEntity.setCodigo(1L);
-        emailEntity.setEmailDestinatario("email@mail.com");
+        emailEntity.setCode(1L);
+        emailEntity.setAddressee("email@mail.com");
         return emailEntity;
     }
 }

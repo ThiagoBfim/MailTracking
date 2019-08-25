@@ -1,6 +1,6 @@
 package com.mail.domain;
 
-import com.mail.enuns.SituacaoEmail;
+import com.mail.enuns.MailState;
 import com.mail.util.JsonUtil;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -11,59 +11,59 @@ import java.time.LocalDateTime;
 @Table(name = "TB_EMAIL")
 public class EmailEntity extends BaseEntity {
 
-    @Column(name = "DS_EMAIL_DESTINATARIO", nullable = false)
-    private String emailDestinatario;
+    @Column(name = "DS_EMAIL_ADDRESSEE", nullable = false)
+    private String addressee; //destinatario
 
     @Column(name = "DS_MESSAGE", nullable = false)
     private String message;
 
-    @Column(name = "DS_ASSUNTO", nullable = false)
-    private String assunto;
+    @Column(name = "DS_SUBJECT", nullable = false)
+    private String subject;
 
-    @Column(name = "DT_ENVIO")
-    private LocalDateTime dataEnvio;
+    @Column(name = "DT_SEND")
+    private LocalDateTime sendDate;
 
-    @Column(name = "DT_ATUALIZACAO")
-    private LocalDateTime dataAtualizacao;
+    @Column(name = "DT_UPDATE")
+    private LocalDateTime updateDate;
 
     @Column(name = "TP_SITUACAO")
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'PENDING'")
-    private SituacaoEmail situacao = SituacaoEmail.PENDING;
+    private MailState state = MailState.PENDING;
 
-    public String getEmailDestinatario() {
-        return emailDestinatario;
+    public String getAddressee() {
+        return addressee;
     }
 
-    public EmailEntity setEmailDestinatario(String emailDestinatario) {
-        this.emailDestinatario = emailDestinatario;
+    public EmailEntity setAddressee(String addressee) {
+        this.addressee = addressee;
         return this;
     }
 
-    public LocalDateTime getDataEnvio() {
-        return dataEnvio;
+    public LocalDateTime getSendDate() {
+        return sendDate;
     }
 
-    public EmailEntity setDataEnvio(LocalDateTime dataEnvio) {
-        this.dataEnvio = dataEnvio;
+    public EmailEntity setSendDate(LocalDateTime sendDate) {
+        this.sendDate = sendDate;
         return this;
     }
 
-    public SituacaoEmail getSituacao() {
-        return situacao;
+    public MailState getState() {
+        return state;
     }
 
-    public EmailEntity setSituacao(SituacaoEmail situacao) {
-        this.situacao = situacao;
+    public EmailEntity setState(MailState state) {
+        this.state = state;
         return this;
     }
 
-    public LocalDateTime getDataAtualizacao() {
-        return dataAtualizacao;
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
     }
 
-    public EmailEntity setDataAtualizacao(LocalDateTime dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
+    public EmailEntity setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
         return this;
     }
 
@@ -80,12 +80,12 @@ public class EmailEntity extends BaseEntity {
         return this;
     }
 
-    public String getAssunto() {
-        return assunto;
+    public String getSubject() {
+        return subject;
     }
 
-    public EmailEntity setAssunto(String assunto) {
-        this.assunto = assunto;
+    public EmailEntity setSubject(String subject) {
+        this.subject = subject;
         return this;
     }
 }

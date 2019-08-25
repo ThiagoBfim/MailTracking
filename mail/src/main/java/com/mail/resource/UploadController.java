@@ -1,7 +1,7 @@
 package com.mail.resource;
 
 import com.mail.domain.EmailEntity;
-import com.mail.enuns.SituacaoEmail;
+import com.mail.enuns.MailState;
 import com.mail.repository.EmailRepository;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvException;
@@ -54,10 +54,10 @@ public class UploadController {
                     .filter(CSVEmail::isValid)
                     .map(emailCsv -> {
                         EmailEntity email = new EmailEntity();
-                        email.setSituacao(SituacaoEmail.PENDING);
-                        email.setEmailDestinatario(emailCsv.getDestinatario());
+                        email.setState(MailState.PENDING);
+                        email.setAddressee(emailCsv.getAddressee());
                         email.setMessage(emailCsv.getMessage());
-                        email.setAssunto(emailCsv.getAssunto());
+                        email.setSubject(emailCsv.getSubject());
                         return email;
                     })
                     .forEach(emailEntity -> saveEmail(countRegistroSalvos, emailEntity));

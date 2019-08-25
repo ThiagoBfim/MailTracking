@@ -31,25 +31,25 @@ public class EmailServiceTest {
     @Test
     public void shouldSendAllEmail() {
         EmailEntity emailSpy = Mockito.spy(createEmail("email@mail.com"));
-        Mockito.when(emailRepository.findAllByDataEnvioIsNull())
+        Mockito.when(emailRepository.findAllBySendDateIsNull())
                 .thenReturn(Collections.singletonList(emailSpy));
         emailService.sendAllEmail();
-        Assert.assertNotNull(emailSpy.getDataEnvio());
+        Assert.assertNotNull(emailSpy.getSendDate());
     }
 
    @Test
     public void shouldRemoveEmailIfEmailsInvalid() {
         EmailEntity emailSpy = Mockito.spy(createEmail("emailinvalid.com"));
-        Mockito.when(emailRepository.findAllByDataEnvioIsNull())
+        Mockito.when(emailRepository.findAllBySendDateIsNull())
                 .thenReturn(Collections.singletonList(emailSpy));
         emailService.sendAllEmail();
-        Assert.assertNull(emailSpy.getDataEnvio());
+        Assert.assertNull(emailSpy.getSendDate());
     }
 
     private EmailEntity createEmail(String email) {
         EmailEntity emailEntity = new EmailEntity();
-        emailEntity.setCodigo(1L);
-        emailEntity.setEmailDestinatario(email);
+        emailEntity.setCode(1L);
+        emailEntity.setAddressee(email);
         return emailEntity;
     }
 }
