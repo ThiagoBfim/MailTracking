@@ -28,9 +28,8 @@ public class EmailEntity extends BaseEntity {
 
     @Column(name = "TP_SITUACAO")
     @Enumerated(EnumType.STRING)
-
-    @ColumnDefault("'PENDENTE'")
-    private SituacaoEmail situacao = SituacaoEmail.PENDENTE;
+    @ColumnDefault("'PENDING'")
+    private SituacaoEmail situacao = SituacaoEmail.PENDING;
 
     public String getEmailDestinatario() {
         return emailDestinatario;

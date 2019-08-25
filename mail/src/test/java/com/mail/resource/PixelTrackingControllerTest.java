@@ -38,7 +38,7 @@ public class PixelTrackingControllerTest {
         this.mockMvc.perform(get("/read?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"emailDestinatario\":\"email@mail.com\",\"situacao\":\"PENDENTE\",\"codigo\":1}"));
-        Assert.assertEquals(SituacaoEmail.LIDO, spyEmail.getSituacao());
+        Assert.assertEquals(SituacaoEmail.READ, spyEmail.getSituacao());
     }
 
     @Test

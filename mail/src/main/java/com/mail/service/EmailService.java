@@ -1,6 +1,7 @@
 package com.mail.service;
 
 import com.mail.domain.EmailEntity;
+import com.mail.enuns.SituacaoEmail;
 import com.mail.repository.EmailRepository;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class EmailService {
     @Transactional
     void updateEmail(EmailEntity email) {
         email.setDataEnvio(LocalDateTime.now());
+        email.setSituacao(SituacaoEmail.SENT);
         emailRepository.save(email);
     }
 }

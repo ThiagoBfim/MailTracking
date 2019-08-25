@@ -22,7 +22,7 @@ public class PixelTrackingController {
     @GetMapping("/read")
     public ResponseEntity<String> updateReaded(@RequestParam(value = "id") Long id) {
         return emailRepository.findById(id).map(email -> {
-            email.setSituacao(SituacaoEmail.LIDO);
+            email.setSituacao(SituacaoEmail.READ);
             email.setDataAtualizacao(LocalDateTime.now());
             EmailEntity emailSaved = emailRepository.save(email);
             return new ResponseEntity<>(emailSaved.toJson(), HttpStatus.OK);

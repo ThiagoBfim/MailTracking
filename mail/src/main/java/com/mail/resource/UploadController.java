@@ -54,7 +54,7 @@ public class UploadController {
                     .filter(CSVEmail::isValid)
                     .map(emailCsv -> {
                         EmailEntity email = new EmailEntity();
-                        email.setSituacao(SituacaoEmail.PENDENTE);
+                        email.setSituacao(SituacaoEmail.PENDING);
                         email.setEmailDestinatario(emailCsv.getDestinatario());
                         email.setMessage(emailCsv.getMessage());
                         email.setAssunto(emailCsv.getAssunto());
