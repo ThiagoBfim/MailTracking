@@ -14,6 +14,7 @@ public class MailApplication {
                 .properties(configLogationProperties)
                 .build()
                 .run(args);
+
     }
 
 
