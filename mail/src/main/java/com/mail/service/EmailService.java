@@ -15,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class EmailService {
@@ -28,7 +29,8 @@ public class EmailService {
     private MailSenderImpl mailSender;
 
     void sendAllEmail() {
-        List<EmailEntity> emails = emailRepository.findAllByState(MailState.PENDING);
+        final List<EmailEntity> emails = emailRepository.findAllByState(MailState.PENDING);
+        AtomicInteger countErrorsMail = new AtomicInteger();
         emails.forEach(email -> {
             if (isValidEmailAddress(email.getAddressee())) {
                 try {
@@ -36,11 +38,14 @@ public class EmailService {
                     updateEmail(email);
                 } catch (MessagingException e) {
                     LOGGER.error(e.getMessage(), e);
+                    countErrorsMail.incrementAndGet();
                 }
             } else {
                 removeEmail(email);
             }
         });
+        LOGGER.info("Total sending e-mails: {}", emails.size() - countErrorsMail.get());
+        LOGGER.info("Total errors sending e-mails: {}", countErrorsMail);
     }
 
     private static boolean isValidEmailAddress(String email) {
