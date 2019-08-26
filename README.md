@@ -12,7 +12,7 @@ To use, send a post to <b><SERVER-URL>/upload</b> with the csv file.
  
 
 #### How use:
-You should have to create a file named "prod.properties", 
+You should create a file named "prod.properties", 
 who's should have the datasource and the mail private properties.
 
 This project have to be on internet. 
