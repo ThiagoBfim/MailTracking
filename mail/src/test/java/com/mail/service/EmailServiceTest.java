@@ -1,6 +1,7 @@
 package com.mail.service;
 
 import com.mail.domain.EmailEntity;
+import com.mail.enuns.MailState;
 import com.mail.repository.EmailRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class EmailServiceTest {
     @Test
     public void shouldSendAllEmail() {
         EmailEntity emailSpy = Mockito.spy(createEmail("email@mail.com"));
-        Mockito.when(emailRepository.findAllBySendDateIsNull())
+        Mockito.when(emailRepository.findAllByState(MailState.PENDING))
                 .thenReturn(Collections.singletonList(emailSpy));
         emailService.sendAllEmail();
         Assert.assertNotNull(emailSpy.getSendDate());
@@ -40,7 +41,7 @@ public class EmailServiceTest {
    @Test
     public void shouldRemoveEmailIfEmailsInvalid() {
         EmailEntity emailSpy = Mockito.spy(createEmail("emailinvalid.com"));
-        Mockito.when(emailRepository.findAllBySendDateIsNull())
+        Mockito.when(emailRepository.findAllByState(MailState.PENDING))
                 .thenReturn(Collections.singletonList(emailSpy));
         emailService.sendAllEmail();
         Assert.assertNull(emailSpy.getSendDate());
