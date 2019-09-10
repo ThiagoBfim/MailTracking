@@ -15,7 +15,7 @@ public class ScheduleSendMail {
     @Autowired
     private EmailService emailService;
 
-    @Scheduled(cron = "0 0/10 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void sendMailSchedule() {
         LOGGER.info("Executing mails sending");
         emailService.sendAllEmail();
