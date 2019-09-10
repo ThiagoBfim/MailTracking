@@ -27,14 +27,14 @@ public class MailSenderImpl {
     public void sendMail(EmailEntity email) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-        helper.setText(email.getMessage() + includePixelTracking(), true); // Use this or above line.
+        helper.setText(email.getMessage() + includePixelTracking(email.getCode()), true); // Use this or above line.
         helper.setTo(email.getAddressee());
         helper.setSubject(email.getSubject());
         javaMailSender.send(mimeMessage);
     }
 
-    private String includePixelTracking() {
-        return "<img scr='" + mailServiceProperties.getDomainName() + "' " +
-                "width=0; higth=0; style=\"position:absolute; visibility:hidden\" style=\"display:none\">";
+    private String includePixelTracking(Long code) {
+        return "<img src='" + mailServiceProperties.getDomainName() + "/read?id=" + code + "' " +
+                "width='0' higth='0' style=\"position:absolute; visibility:hidden\" style=\"display:none\">";
     }
 }
