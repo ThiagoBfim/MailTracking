@@ -14,7 +14,7 @@ public class EmailEntity extends BaseEntity {
     @Column(name = "DS_EMAIL_ADDRESSEE", nullable = false)
     private String addressee; //destinatario
 
-    @Column(name = "DS_MESSAGE", nullable = false)
+    @Column(name = "DS_MESSAGE", nullable = false, length = 5000)
     private String message;
 
     @Column(name = "DS_SUBJECT", nullable = false)
