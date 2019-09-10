@@ -31,4 +31,3 @@ build/
 .vscode/
 
 maildb*.db
-**prod.properties
